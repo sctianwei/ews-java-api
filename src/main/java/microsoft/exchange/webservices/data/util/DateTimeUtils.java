@@ -98,21 +98,21 @@ public final class DateTimeUtils {
 
   private static DateTimeFormatter[] createDateTimeFormats() {
     return new DateTimeFormatter[] {
-        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-ddZ").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd").withZone(DateTimeZone.UTC)
+        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZ").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-ddZ").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd").withZoneUTC()
     };
   }
 
   private static DateTimeFormatter[] createDateFormats() {
     return new DateTimeFormatter[] {
-        DateTimeFormat.forPattern("yyyy-MM-ddZ").withZone(DateTimeZone.UTC),
-        DateTimeFormat.forPattern("yyyy-MM-dd").withZone(DateTimeZone.UTC)
+        DateTimeFormat.forPattern("yyyy-MM-ddZ").withZoneUTC(),
+        DateTimeFormat.forPattern("yyyy-MM-dd").withZoneUTC()
     };
   }
 
