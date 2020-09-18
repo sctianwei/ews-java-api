@@ -36,6 +36,8 @@ import microsoft.exchange.webservices.data.core.exception.service.local.ServiceL
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceXmlSerializationException;
 import microsoft.exchange.webservices.data.misc.OutParam;
 import microsoft.exchange.webservices.data.util.DateTimeUtils;
+import microsoft.exchange.webservices.data.util.StringUtils;
+
 import org.apache.commons.codec.binary.Base64;
 
 import javax.xml.stream.XMLStreamException;
@@ -347,7 +349,7 @@ public final class UserConfigurationDictionary extends ComplexProperty
         valueAsString = String.valueOf(dictionaryObject);
       } else if (dictionaryObject instanceof byte[]) {
         dictionaryObjectType = UserConfigurationDictionaryObjectType.ByteArray;
-        valueAsString = Base64.encodeBase64String((byte[]) dictionaryObject);
+        valueAsString = StringUtils.newStringUtf8(Base64.encodeBase64((byte[]) dictionaryObject, false));
       } else if (dictionaryObject instanceof Byte[]) {
         dictionaryObjectType = UserConfigurationDictionaryObjectType.ByteArray;
 
@@ -358,7 +360,7 @@ public final class UserConfigurationDictionary extends ComplexProperty
           to[currentIndex] = (byte) from[currentIndex];
         }
 
-        valueAsString = Base64.encodeBase64String(to);
+        valueAsString = StringUtils.newStringUtf8(Base64.encodeBase64(to, false));
       } else {
         throw new IllegalArgumentException(String.format(
             "Unsupported type: %s", dictionaryObject.getClass()
@@ -590,7 +592,7 @@ public final class UserConfigurationDictionary extends ComplexProperty
     } else if (type.equals(UserConfigurationDictionaryObjectType.Byte)) {
       dictionaryObject = Byte.parseByte(value.get(0));
     } else if (type.equals(UserConfigurationDictionaryObjectType.ByteArray)) {
-      dictionaryObject = Base64.decodeBase64(value.get(0));
+      dictionaryObject = Base64.decodeBase64(StringUtils.getBytesUtf8(value.get(0)));
     } else if (type.equals(UserConfigurationDictionaryObjectType.DateTime)) {
       Date dateTime = DateTimeUtils.convertDateTimeStringToDate(value.get(0));
       if (dateTime != null) {

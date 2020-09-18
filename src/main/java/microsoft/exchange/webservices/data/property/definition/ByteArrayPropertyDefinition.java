@@ -25,6 +25,8 @@ package microsoft.exchange.webservices.data.property.definition;
 
 import microsoft.exchange.webservices.data.core.enumeration.misc.ExchangeVersion;
 import microsoft.exchange.webservices.data.core.enumeration.property.PropertyDefinitionFlags;
+import microsoft.exchange.webservices.data.util.StringUtils;
+
 import org.apache.commons.codec.binary.Base64;
 
 import java.util.EnumSet;
@@ -55,7 +57,7 @@ public final class ByteArrayPropertyDefinition extends TypedPropertyDefinition<b
    */
   @Override
   protected byte[] parse(String value) {
-    return Base64.decodeBase64(value);
+    return Base64.decodeBase64(StringUtils.getBytesUtf8(value));
   }
 
   /**
@@ -66,7 +68,7 @@ public final class ByteArrayPropertyDefinition extends TypedPropertyDefinition<b
    */
   @Override
   protected String toString(byte[] value) {
-    return Base64.encodeBase64String(value);
+    return StringUtils.newStringUtf8(Base64.encodeBase64(value, false));
   }
 
   /**

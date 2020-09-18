@@ -883,7 +883,7 @@ public final class EwsUtilities {
       xsDuration = xsDuration.replace("-P", "P");
     }
 
-    Period period = Period.parse(xsDuration, ISOPeriodFormat.standard());
+    Period period = ISOPeriodFormat.standard().parsePeriod(xsDuration);
       
     long retval = period.toStandardDuration().getMillis();
     

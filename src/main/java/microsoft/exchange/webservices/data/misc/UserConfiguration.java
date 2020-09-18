@@ -41,6 +41,8 @@ import microsoft.exchange.webservices.data.property.complex.FolderId;
 import microsoft.exchange.webservices.data.property.complex.ItemId;
 import microsoft.exchange.webservices.data.property.complex.UserConfigurationDictionary;
 import microsoft.exchange.webservices.data.security.XmlNodeType;
+import microsoft.exchange.webservices.data.util.StringUtils;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -159,7 +161,7 @@ public class UserConfiguration {
     writer.writeStartElement(XmlNamespace.Types, xmlElementName);
 
     if (byteArray != null && byteArray.length > 0) {
-      writer.writeValue(Base64.encodeBase64String(byteArray), xmlElementName);
+      writer.writeValue(StringUtils.newStringUtf8(Base64.encodeBase64(byteArray, false)), xmlElementName);
     }
 
     writer.writeEndElement();
@@ -605,10 +607,10 @@ public class UserConfiguration {
               XmlElementNames.Dictionary);
         } else if (reader.getLocalName()
             .equals(XmlElementNames.XmlData)) {
-          this.xmlData = Base64.decodeBase64(reader.readElementValue());
+          this.xmlData = Base64.decodeBase64(StringUtils.getBytesUtf8(reader.readElementValue()));
         } else if (reader.getLocalName().equals(
             XmlElementNames.BinaryData)) {
-          this.binaryData = Base64.decodeBase64(reader.readElementValue());
+          this.binaryData = Base64.decodeBase64(StringUtils.getBytesUtf8(reader.readElementValue()));
         } else {
           EwsUtilities.ewsAssert(false, "UserConfiguration.loadFromXml",
                                  "Xml element not supported: " + reader.getLocalName());

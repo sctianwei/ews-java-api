@@ -24,6 +24,8 @@
 package microsoft.exchange.webservices.data.misc;
 
 import microsoft.exchange.webservices.data.core.EwsUtilities;
+import microsoft.exchange.webservices.data.util.StringUtils;
+
 import org.apache.commons.codec.binary.Base64;
 
 import java.util.Date;
@@ -75,7 +77,7 @@ public final class IFunctions {
     public static final Base64Decoder INSTANCE = new Base64Decoder();
 
     public Object func(final String s) {
-      return Base64.decodeBase64(s);
+      return Base64.decodeBase64(StringUtils.getBytesUtf8(s));
     }
   }
 
@@ -83,7 +85,7 @@ public final class IFunctions {
     public static final Base64Encoder INSTANCE = new Base64Encoder();
 
     public String func(final Object o) {
-      return Base64.encodeBase64String((byte[]) o);
+      return StringUtils.newStringUtf8(Base64.encodeBase64((byte[]) o, false));
     }
   }
 

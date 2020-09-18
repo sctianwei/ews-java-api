@@ -28,6 +28,8 @@ import static org.junit.Assert.assertNotNull;
 
 import microsoft.exchange.webservices.data.core.enumeration.misc.ExchangeVersion;
 import microsoft.exchange.webservices.data.core.enumeration.property.PropertyDefinitionFlags;
+import microsoft.exchange.webservices.data.util.StringUtils;
+
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +44,7 @@ public class ByteArrayPropertyDefinitionTest {
   private ByteArrayPropertyDefinition testObject;
 
   private static final String TEST_STRING = "Lorem ipsum dolor sit amet";
-  private static final String BASE64_ENCODEDSTRING = Base64.encodeBase64String(TEST_STRING.getBytes());
+  private static final String BASE64_ENCODEDSTRING = StringUtils.newStringUtf8(Base64.encodeBase64(TEST_STRING.getBytes(), false));
 
   /**
    * setup
